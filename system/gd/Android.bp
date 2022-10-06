@@ -94,6 +94,8 @@ cc_defaults {
     name: "libbluetooth_gd_defaults",
     defaults: [
         "gd_defaults",
+        "disable_bluetooth_le_read_buffer_size_v2_defaults",
+        "disable_bluetooth_le_set_host_feature_defaults",
     ],
     host_supported: true,
     target: {
