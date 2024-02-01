@@ -2462,7 +2462,7 @@ static void l2cu_set_acl_latency_syna(tL2C_LCB* p_lcb, tL2CAP_LATENCY latency) {
  ******************************************************************************/
 
 static void l2cu_set_acl_latency_mtk(tL2CAP_LATENCY latency) {
-  log::info("Set ACL latency: {}",
+  LOG_INFO("Set ACL latency: %s",
             latency == L2CAP_LATENCY_LOW ? "Low Latancy" : "Normal Latency");
 
   uint8_t command[HCI_MTK_ACL_PRIORITY_PARAM_SIZE];
