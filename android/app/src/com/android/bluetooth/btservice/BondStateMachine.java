@@ -17,7 +17,9 @@
 package com.android.bluetooth.btservice;
 
 import static android.Manifest.permission.BLUETOOTH_CONNECT;
+import static android.Manifest.permission.BLUETOOTH_PRIVILEGED;
 
+import android.annotation.RequiresPermission;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothClass;
@@ -494,6 +496,7 @@ final class BondStateMachine extends StateMachine {
         accConfirmSkip.add(new Pair<>("NVIDIA Controller v01.04", PERIPHERAL_GAMEPAD));
     };
 
+    @RequiresPermission(BLUETOOTH_CONNECT)
     private boolean isSkipConfirmationAccessory(BluetoothDevice device) {
         for (Pair<String, Integer> entry : accConfirmSkip) {
             if (device.getName().equals(entry.first)
@@ -505,6 +508,7 @@ final class BondStateMachine extends StateMachine {
         return false;
     }
 
+    @RequiresPermission(allOf = {BLUETOOTH_CONNECT, BLUETOOTH_PRIVILEGED})
     private void sendDisplayPinIntent(byte[] address, Optional<Integer> maybePin, int variant) {
         BluetoothDevice device = mRemoteDevices.getDevice(address);
         if (device != null && device.isBondingInitiatedLocally()
